@@ -20,6 +20,28 @@ class Student
 	end
 end
 
+def roll_call(students,grade)
+  puts "#{grade.capitalize}:"
+  if %w(junior senior).include?(grade)
+    students.select { |student| student.send("#{grade}?".to_sym)}.each do |stu|
+      puts "* #{stu}"
+    end
+  else  
+    puts "Sorry you cannot call that grade"
+  end
+end
+
+fred = Student.new("Fred", "James", 12)
+sarah = Student.new("Sarah", "Smith", 12)
+jack = Student.new("Jack", "Gong", 11)
+all_students = [fred, sarah, jack]
+
+%w(senior junior freshman).each do |grade|
+  roll_call(all_students,grade)
+end
+
+#---------------Old Code Ideas------------#
+
 #def seniors(students)
 #  puts "Seniors: "
 #  students.select { |student| student.senior? }.each do |senior|
@@ -45,36 +67,32 @@ end
 #  end  
 #end
 
-def roll_call(students, grade)
-  puts "#{grade.capitalize}:"
-  if grade == "senior"
-    students.select { |student| student.senior? }.each do |stu|
-      puts "* #{stu}"
-    end
-  elsif grade == "junior"
-    students.select { |student| student.junior? }.each do |stu| 
-      puts "* #{stu}"
-    end
-  else
-    puts "Sorry you cannot call that grade"
-  end  
-end
 
-
-fred = Student.new("Fred", "James", 12)
-sarah = Student.new("Sarah", "Smith", 12)
-jack = Student.new("Jack", "Gong", 11)
-all_students = [fred, sarah, jack]
+# def roll_call(students, grade)
+#   puts "#{grade.capitalize}:"
+#   if grade == "senior"
+#     students.select { |student| student.senior? }.each do |stu|
+#       puts "* #{stu}"
+#     end
+#   elsif grade == "junior"
+#     students.select { |student| student.junior? }.each do |stu| 
+#       puts "* #{stu}"
+#     end
+#   else
+#     puts "Sorry you cannot call that grade"
+#   end  
+# end
 
 #seniors(all_students).each do |student|
 #  puts "* #{student}\n"
 #end
 #seniors(all_students)
-roll_call(all_students, "senior")
-roll_call(all_students, "junior")
-roll_call(all_students, "freshman")
-
 #juniors(all_students).each do |student|
-#	 puts "* #{student}\n"
+#  puts "* #{student}\n"
 #end
 #juniors(all_students)
+
+# roll_call(all_students, "senior")
+# roll_call(all_students, "junior")
+# roll_call(all_students, "freshman")
+
